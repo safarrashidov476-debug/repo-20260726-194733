@@ -1,0 +1,23 @@
+UCHTA FAYLNI QUYIDAGICHA JOYLASHTIRING:
+
+1) PhoneNumberPreprocessor.java
+   -> src/android/RHVoice-core/src/main/java/com/github/olga_yakovleva/rhvoice/android/PhoneNumberPreprocessor.java
+   (yangi fayl sifatida qo'shiladi yoki eskisi ustidan yoziladi)
+
+2) settings.xml
+   -> src/android/RHVoice-core/src/main/res/xml/settings.xml
+   (eskisining ustidan to'liq yozing - eski fayl endi kerak emas)
+
+3) RHVoiceService_QOSHIMCHA_KOD.java ichidagi kodni
+   -> src/android/RHVoice-core/src/main/java/com/github/olga_yakovleva/rhvoice/android/RHVoiceService.java
+   faylidagi "String profileSpec = voiceProfileSpecBuilder.toString();" qatoridan OLDIN joylashtiring.
+
+   VA o'sha faylda "tts.engine.speak(request.getText(), params, player);" qatorini toping,
+   uni shu bilan almashtiring (raqamlarni formatlash uchun):
+
+   String processedText = PhoneNumberPreprocessor.process(request.getText());
+   tts.engine.speak(processedText, params, player);
+
+Push qilgach, avvalgi GitHub Actions workflow avtomatik ravishda bu fayllarni
+asl RHVoice manbasiga qo'yib, build qiladi (agar workflow'ni "faqat 2ta fayl yuklash"
+usulida sozlagan bo'lsangiz, endi bu 3ta faylni ham xuddi shunday sxemaga qo'shing).
